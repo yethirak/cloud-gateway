@@ -10,16 +10,28 @@ spring:
           uri: lb://userservice
           predicates:
             - Path=/users/**
-        - id: dpartmentservice
+        - id: departmentservice
           uri: lb://departmentservice
           predicates:
             - Path=/departments/**
 
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      default-zone: http://localhost:8761/eureka
-  instance:
-    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+    prometheus:
+      enabled: true
+
+### This is now coming from spring cloud
+#eureka:
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    hostname: localhost
